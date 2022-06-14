@@ -1,0 +1,134 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.halaman_login {
+    background-color: rgb(187, 187, 187);
+    width: 600px;
+    // height: 300px;
+    border-radius: 10px;
+    box-shadow: rgb(2 12 27 / 70%) 0px 10px 30px -15px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.text {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.desc {
+    font-size: 12px;
+}
+
+.input_login {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.text_input {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.button_add {
+    min-width: 100px;
+    padding: 12px 32px;
+    border-radius: 4px;
+    border: none;
+    background: rgb(15, 138, 249);
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: rgb(2 12 27 / 70%) 0px 10px 30px -15px;
+}
+
+.button_add:disabled {
+    color: #fff;
+    pointer-events: none;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    opacity: 0.65;
+}
+
+@media only screen and (min-width: 250px) and (max-width: 480px){
+    .container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .halaman_login {
+        background-color: rgb(187, 187, 187);
+        width: 250px;
+        // height: 300px;
+        border-radius: 10px;
+        box-shadow: rgb(2 12 27 / 70%) 0px 10px 30px -15px;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .form-text {
+        font-size: 12px;
+    }
+
+    .form-control {
+        font-size: 12px;
+    }
+
+    .button_add {
+        min-width: 100px;
+        padding: 8px 20px;
+        border-radius: 4px;
+        border: none;
+        background: rgb(15, 138, 249);
+        color: rgb(255, 255, 255);
+        font-size: 14px;
+        cursor: pointer;
+        box-shadow: rgb(2 12 27 / 70%) 0px 10px 30px -15px;
+    }
+
+    .halaman_login {
+        background-color: rgb(187, 187, 187);
+        width: 600px;
+        // height: 300px;
+        border-radius: 10px;
+        box-shadow: rgb(2 12 27 / 70%) 0px 10px 30px -15px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .text_input {
+        font-size: 13px;
+        font-weight: 500;
+    }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 768px){
+    .container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+}

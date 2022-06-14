@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="halaman_login">
+        <div class="text">SingUp Employee Assessment</div>
+        <span class="desc">Silahkan untuk mengisikan data pada isian di bawah ini, data yang diinputkan hanya bersifat sementara dan hanya digunakan untuk nentinya melakukan proses login.</span>
+        <div class="input_login">
+            <form [formGroup]="signupForm" (ngSubmit)="singUp()">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="username" class="form-label text_input">Username</label>
+                        <input type="text" formControlName="username" class="form-control" id="username"
+                            aria-describedby="username">
+                        <div id="username"
+                            *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched"
+                            class="form-text" style="color: red;">Username tidak boleh kosong</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="password" class="form-label text_input">Password</label>
+                        <input type="password" formControlName="password" class="form-control" id="password"
+                            aria-describedby="password">
+                        <div id="password"
+                            *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
+                            class="form-text" style="color: red;">First Name tidak boleh kosong</div>
+                    </div>
+                </div>
+                <div class="col mb-3">
+                    <label for="email" class="form-label text_input">Email address</label>
+                    <input type="email" formControlName="email" class="form-control" id="email"
+                        aria-describedby="email">
+                    <div id="email"
+                                    *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+                                    class="form-text" style="color: red;">Email is invalid dan tidak boleh kosong</div>
+                </div>
+                <button type="submit" [disabled]="!signupForm.valid" class="button_add">Sign Up</button>
+            </form>
+            
+            <a routerLink="/login" style="text-align: end; font-size: 11px;" href="">Jika sudah punya akun ? Login aja ya.</a>
+        </div>
+    </div>

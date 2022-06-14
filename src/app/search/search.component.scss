@@ -1,0 +1,25 @@
+.button_search {
+    display: flex;
+    flex-direction: row;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    background-color: #b0b0b0;
+    padding: 8px 20px;
+    border-radius: 6px;
+    max-height: 100%;
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+    gap: 10px;
+    transition: all 0.3s ease 0s;
+    box-shadow: rgb(2 12 27 / 70%) 0px 10px 30px -15px;
+}
+
+.input_style {
+    outline: none;
+    border: none;
+    background: transparent;
+    color: #000;
+}

@@ -1,0 +1,318 @@
+<div class="toolbar" role="banner">
+    <div class="header_content">
+        <div class="header_logo">
+            <img width="40" alt="Angular Logo"
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==" />
+        </div>
+        <div class="header_profile">
+            <div class="profile">
+                <div class="profile_img"><img width="40" src="../assets/profile.ico" />
+                </div>
+                <div class="text_profile" (click)="logOut()">Logout</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content" role="main">
+    <div class="assessment_container">
+        <div class="heading">
+            <span class="font_project">{{ title }}</span>
+            <span>Project use to list a Employee</span>
+        </div>
+        <div class="button_all">
+            <app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
+            <div class="button_sort">
+                <div class="button_hero_sort">
+                    <button type="button" (click)="sortData()" class="button_add">
+                        Sort By ID
+                    </button>
+                    <button type="button" (click)="buttonEmployeeAdd()" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" class="button_add">Add
+                        Employee</button>
+                </div>
+            </div>
+        </div>
+        <div class="grid_data">
+            <div class="all_card">
+                <div class="item_all" *ngFor="let data of employeeData | slice: startIndex: endIndex; index as i ">
+                    <div class="card"
+                        *ngIf="searchText === '' || data.username.toLocaleLowerCase().includes(searchText)">
+                        <div class="button_edit_delete">
+                            <button type="button" data-bs-toggle="modal" (click)="editEmployee(data)"
+                                data-bs-target="#exampleModal" class="button_edit">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                    stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 20h9"></path>
+                                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                                </svg>
+                            </button>
+                            <button class="button_delete" (click)="deleteEmployee(data)" type="button">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                    stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path
+                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="data_employee">
+                            <span class="data_text" style="font-weight: 600; font-size: 18px;">{{data.id}}
+                                {{data.username}}</span>
+                            <span class="data_text">{{data.firstName}} {{data.lastName}}</span>
+                            <span class="data_text">{{data.email}}</span>
+                            <span class="data_text">{{data.firstName}}</span>
+                            <span class="data_text">{{data.basicSalary | currency : 'Rp. '}}</span>
+                            <span class="data_text">{{data.status}}</span>
+                            <span class="data_text">{{data.birthDate}}</span>
+                            <span class="data_text">{{data.group}}</span>
+                            <span class="data_text">{{data.description}}</span>
+                        </div>
+                        <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="button_add"
+                            (click)="detailEmployee(data)">Detail</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="table-container">
+            <div class="table">
+                <div class="table_column">
+                    <div class="column" *ngFor="let dataCol of column">{{dataCol.name}}</div>
+                </div>
+                <div class="table_row" *ngFor="let data of employeeData; index as i">
+                    <div class="row">{{i + 1}}</div>
+                    <div class="row">{{data.username}}</div>
+                    <div class="row">{{data.email}}</div>
+                    <div class="row">{{data.status}}</div>
+                    <div class="row">{{data.basicSalary}}</div>
+                    <div class="row">{{data.birthDate}}</div>
+                    <div class="row">{{data.group}}</div>
+                    <div class="row">{{data.description}}</div>
+                    <div class="row">
+                        <div class="button_edit_delete_table">
+                            <button type="button" data-bs-toggle="modal" (click)="editEmployee(data)"
+                                data-bs-target="#exampleModal" class="button_edit">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                    stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 20h9"></path>
+                                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                                </svg>
+                            </button>
+                            <button class="button_delete" (click)="deleteEmployee(data)" type="button">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+                                    stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path
+                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="button_pagination">
+            <div class="button_pagen">
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                      Show {{dataIndexBaru}}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                      <li><a (click)="setEndIndex(8)" class="dropdown-item active">8</a></li>
+                      <li><a (click)="setEndIndex(16)" class="dropdown-item">16</a></li>
+                      <li><a (click)="setEndIndex(24)" class="dropdown-item">24</a></li>
+                    </ul>
+                  </div>
+                <div class="keterangan_data">Jumlah Data {{size}} - Page {{pageBerapa}}</div>
+
+                <div class="button_nation" style="display: flex; align-items: center">
+
+                    <div class="angka" *ngFor="let i of getArrayfromNumber(employeeData.length); let in = index">
+                        <!-- <div class="button_page" (click)="updateIndex(in-1)">Prev</div> -->
+                        <a class="button_page" (click)="updateIndex(in)">{{in + 1}}</a>
+                        <!-- <div class="button_page" (click)="updateIndex(in+1)">Next</div> -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title" style="font-weight: 600;" id="exampleModalLabel">Employee Data</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="formValue">
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-4">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" formControlName="username" class="form-control" id="username"
+                                    aria-describedby="username">
+                                <div id="username"
+                                    *ngIf="formValue.get('username')?.invalid && formValue.get('username')?.touched"
+                                    class="form-text" style="color: red;">Username tidak boleh kosong</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" formControlName="firstName" class="form-control" id="firstName"
+                                    aria-describedby="firstName">
+                                <div id="firstName"
+                                    *ngIf="formValue.get('firstName')?.invalid && formValue.get('firstName')?.touched"
+                                    class="form-text" style="color: red;">First Name tidak boleh kosong</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" formControlName="lastName" class="form-control" id="lastName"
+                                    aria-describedby="lastName">
+                                <div id="lastName"
+                                    *ngIf="formValue.get('lastName')?.invalid && formValue.get('lastName')?.touched"
+                                    class="form-text" style="color: red;">Last Name tidak boleh kosong</div>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="exampleInputEmail1" class="form-label">Birthday Date</label>
+                                <input max={{maxDate}}  type="date" formControlName="birthDate" class="form-control"
+                                    id="exampleInputEmail1" aria-describedby="birthDate">
+                                <div id="birthDate"
+                                    *ngIf="formValue.get('birthDate')?.invalid && formValue.get('birthDate')?.touched"
+                                    class="form-text" style="color: red;">Birth Date tidak boleh kosong</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="basicSalary" class="form-label">Salary</label>
+                                <input type="number" min="0" formControlName="basicSalary" class="form-control"
+                                    id="basicSalary" aria-describedby="basicSalary">
+                                <div id="basicSalary"
+                                    *ngIf="formValue.get('basicSalary')?.invalid && formValue.get('basicSalary')?.touched"
+                                    class="form-text" style="color: red;">Basic Salary tidak boleh kosong atau minus
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="status" class="form-label">Status</label>
+                                <input type="text" formControlName="status" class="form-control" id="status"
+                                    aria-describedby="status">
+                                <div id="status"
+                                    *ngIf="formValue.get('status')?.invalid && formValue.get('status')?.touched"
+                                    class="form-text" style="color: red;">Status tidak boleh kosong</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="description" class="form-label">Description</label>
+                                <input type="date" formControlName="description" class="form-control" id="description"
+                                    aria-describedby="description">
+                                <div id="description"
+                                    *ngIf="formValue.get('description')?.invalid && formValue.get('description')?.touched"
+                                    class="form-text" style="color: red;">Description tidak boleh kosong</div>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" formControlName="email" class="form-control" id="email"
+                                    aria-describedby="email">
+                                <div id="email"
+                                    *ngIf="formValue.get('email')?.invalid && formValue.get('email')?.touched"
+                                    class="form-text" style="color: red;">Email is invalid dan tidak boleh kosong</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="group" class="form-label">Group</label>
+                                <ng-select formControlName="group" id="group" [items]="cars" bindLabel="name" placeholder="select item" bindValue="name" [(ngModel)]="selectedCar">
+                                </ng-select>
+                                <div id="group"
+                                    *ngIf="formValue.get('group')?.invalid && formValue.get('group')?.touched"
+                                    class="form-text" style="color: red;">Group tidak boleh kosong</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancel" class="button_add" style="background-color: red;"
+                        data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" *ngIf="showAdd" (click)="addEmployee()" [disabled]="formValue?.invalid"
+                        class="button_add">Submit</button>
+                    <button type="submit" *ngIf="showUpdate" (click)="updateEmployeeDetails()"
+                        [disabled]="formValue?.invalid" class="button_add">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Details-->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body" id="staticBackdropLabel">
+                    <div class="header_empolyee">
+                        <div class="text">Detail Data {{detailData.username}}</div>
+                        <span class="desc">Berikut ini adalah beberapa data yang ditampilkan dari informasi yang ada. Informasi atau yang ditampilakan hanyalah dummy-data.</span>
+                    </div>
+                    <div class="detail_employee">
+
+                        <div class="row_data">
+                            <div class="data_em">
+                                <label for="username" class="form-label text_input">Username</label>
+                                <div class="text_data">{{detailData.username}}</div>
+                            </div>
+                            <div class="data_em">
+                                <label for="username" class="form-label text_input">First Name</label>
+                                <div class="text_data">{{detailData.firstName}}</div>
+                            </div>
+                            <div class="data_em">
+                                <label for="username" class="form-label text_input">Last Name</label>
+                                <div class="text_data">{{detailData.lastName}}</div>
+                            </div>
+                            <div class="data_em">
+                                <label for="username" class="form-label text_input">Email Address</label>
+                                <div class="text_data">{{detailData.email}}</div>
+                            </div>
+                            <div class="data_em">
+                                <label for="username" class="form-label text_input">Group</label>
+                                <div class="text_data">{{detailData.group}}</div>
+                            </div>
+                        </div>
+
+                        <div class="row_data">
+                            <div class="data_em">
+                                <label for="username" class="form-label text_input">Birthday Date</label>
+                                <div class="text_data">{{detailData.birthDate}}</div>
+                            </div>
+                            <div class="data_em">
+                                <label for="username" class="form-label text_input">Status</label>
+                                <div class="text_data">{{detailData.status}}</div>
+                            </div>
+                            <div class="data_em">
+                                <label for="username" class="form-label text_input">Basic Salary</label>
+                                <div class="text_data">{{detailData.basicSalary | currency : 'Rp. '}}</div>
+                            </div>
+                            <div class="data_em">
+                                <label for="username" class="form-label text_input">Description</label>
+                                <div class="text_data">{{detailData.description}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        class="button_add">Oke</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" #selection>
+</div>

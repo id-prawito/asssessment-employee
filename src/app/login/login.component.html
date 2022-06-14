@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="halaman_login">
+        <div class="text">Login Employee Assessment</div>
+        <span class="desc">Login ini hanya dapat dilakukan untuk user yang sudah melakukan signup dan datanya terdatas dalam database, dan karena data yang digunakan adalah data dummy dan menggunakan json-server, jadi proses login hanya menggunakan auth guard, belum berupa token dll. </span>
+        <div class="input_login">
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="username" class="form-label text_input">Username</label>
+                        <input type="text" formControlName="username" class="form-control" id="username"
+                            aria-describedby="username">
+                        <div id="username"
+                            *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+                            class="form-text" style="color: red;">Username tidak boleh kosong</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="password" class="form-label text_input">Password</label>
+                        <input type="password" formControlName="password" class="form-control" id="password"
+                            aria-describedby="password">
+                        <div id="firstName"
+                            *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched && loginForm.get('password')?.hasError"
+                            class="form-text" style="color: red;">Password tidak boleh kosong</div>
+                    </div>
+                </div>
+                <button type="submit" [disabled]="!loginForm.valid" class="button_add">Login</button>
+            </form>
+            
+        </div>
+        <a routerLink="/signup" style="text-align: end; font-size: 11px;" href="">Belum punya akun ? Daftar.</a>
+    </div>
+</div>
